@@ -6,4 +6,10 @@ function findAll() {
   });
 }
 
-module.exports = { findAll };
+function findOne(id) {
+  return new Promise((resolve, reject) => {
+    resolve(products.find((product) => product.id === id));
+  });
+}
+
+module.exports = { findAll, findOne };
