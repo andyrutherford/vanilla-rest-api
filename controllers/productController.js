@@ -27,4 +27,19 @@ async function getProductById(req, res) {
   }
 }
 
-module.exports = { getProducts, getProductById };
+async function createProduct(req, res) {
+  try {
+    const product = {
+      title: 'Test',
+      description: 'the description',
+      price: 100,
+    };
+    const newProduct = await Product.create(product);
+    res.writeHead(201, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify(newProduct));
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+module.exports = { getProducts, getProductById, createProduct };
