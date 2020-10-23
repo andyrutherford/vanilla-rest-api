@@ -87,9 +87,9 @@ async function deleteProduct(req, res) {
       res.writeHead(404, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'Product not found.' }));
     } else {
-      const p = await Product.deleteOne(id);
+      const products = await Product.deleteOne(id);
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ p }));
+      res.end(JSON.stringify({ products }));
     }
   } catch (error) {
     console.error(error);
