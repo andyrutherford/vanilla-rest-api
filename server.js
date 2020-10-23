@@ -3,6 +3,7 @@ const {
   getProducts,
   getProductById,
   createProduct,
+  updateProduct,
 } = require('./controllers/productController');
 
 const server = http.createServer((req, res) => {
@@ -10,6 +11,8 @@ const server = http.createServer((req, res) => {
     getProducts(req, res);
   } else if (req.url.match(/\/api\/products\/\w+/) && req.method === 'GET') {
     getProductById(req, res);
+  } else if (req.url.match(/\/api\/products\/\w+/) && req.method === 'PUT') {
+    updateProduct(req, res);
   } else if (req.url === '/api/products' && req.method === 'POST') {
     createProduct(req, res);
   } else {

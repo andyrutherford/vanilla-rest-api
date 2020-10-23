@@ -27,4 +27,13 @@ function create(product) {
   });
 }
 
-module.exports = { findAll, findOne, create };
+function update(product, id) {
+  return new Promise((resolve, reject) => {
+    const idx = products.findIndex((p) => p.id === id);
+    products[idx] = { ...product, id };
+    writeToFile('./data/products.json', products);
+    resolve(products[idx]);
+  });
+}
+
+module.exports = { findAll, findOne, create, update };
