@@ -50,7 +50,6 @@ async function createProduct(req, res) {
 }
 
 async function updateProduct(req, res) {
-  console.log('update');
   try {
     let id = req.url;
     id = id.split('/api/products/')[1];
@@ -79,4 +78,28 @@ async function updateProduct(req, res) {
   }
 }
 
-module.exports = { getProducts, getProductById, createProduct, updateProduct };
+async function deleteProduct(req, res) {
+  try {
+    let id = req.url;
+    id = id.split('/api/products/')[1];
+    const product = await Product.findOne(id);
+    if (!product) {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ message: 'Product not found.' }));
+    } else {
+      const p = await Product.deleteOne(id);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ p }));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+module.exports = {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};

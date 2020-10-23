@@ -35,5 +35,12 @@ function update(product, id) {
     resolve(products[idx]);
   });
 }
+function deleteOne(id) {
+  return new Promise((resolve, reject) => {
+    const idx = products.findIndex((p) => p.id === id);
+    products.splice(idx, 1);
+    resolve(products);
+  });
+}
 
-module.exports = { findAll, findOne, create, update };
+module.exports = { findAll, findOne, create, update, deleteOne };
